@@ -23,7 +23,7 @@ def input_analysis():
  
  output_file = open('output.txt', 'w') 
  parsesent_file = open('parse_test.txt', 'w')
- f=open('input.txt','rU')#open the file
+ f=open('bAb_3.txt','rU')#open the file
  raw=f.read()
 
 #print(raw)
@@ -88,16 +88,16 @@ def input_analysis():
  print('Subject list:',sent_lambda_parsing_subject)
  print('Object list:',sent_lambda_parsing_object)
 
- for i in range(0,a):
-  parsesent_file.write(sent_lambda_parsing_verb[i]+' '+sent_lambda_parsing_subject[i]+' '+sent_lambda_parsing_object[i]+'.'+'\n')
- parsesent_file.close()
+ #for i in range(0,a):
+  #parsesent_file.write(sent_lambda_parsing_verb[i]+' '+sent_lambda_parsing_subject[i]+' '+sent_lambda_parsing_object[i]+'.'+'\n')
+ #parsesent_file.close()
  
- for i in range(0,a):
-  print(sent_lambda_parsing_verb[i],'(',sent_lambda_parsing_subject[i],'---',sent_lambda_parsing_object[i],')')
-  output_file.write(sent_lambda_parsing_verb[i]+' '+sent_lambda_parsing_subject[i]+' '+sent_lambda_parsing_object[i]+'.'+'\n')
+ #for i in range(0,a):
+  #print(sent_lambda_parsing_verb[i],'(',sent_lambda_parsing_subject[i],'---',sent_lambda_parsing_object[i],')')
+  #output_file.write(sent_lambda_parsing_verb[i]+' '+sent_lambda_parsing_subject[i]+' '+sent_lambda_parsing_object[i]+'.'+'\n')
  #print('\n')
- output_file.close()
- parsesent_file.close()
+ #output_file.close()
+ #parsesent_file.close()
     
 
 print('\n')
@@ -170,6 +170,7 @@ question_word_type=['why','who','Where','which','whom']
 
 def answering_question(question_in,verb_in,subj_in,obj_in):
     object_position=0
+    subject_position=0
     len_verb=len(verb_in)
     print(verb_in)
     wh_question_word=question_in[0]
@@ -177,6 +178,7 @@ def answering_question(question_in,verb_in,subj_in,obj_in):
     question_word.append(wh_question_word)
     print(question_word)
     copy_sent_lambda_parsing_object=[]
+    copy_sent_lambda_parsing_subject=[]
     print('Length is :',len_verb)
 
     #match finding
@@ -188,7 +190,7 @@ def answering_question(question_in,verb_in,subj_in,obj_in):
         if obj_question_word in subj_in[i]:
          print('Subj',i)
          question_object.append('Sbj')
-         object_position=i
+         subject_position=i
          break
         elif obj_question_word in obj_in[i]:
          print('Obj',i)
@@ -244,8 +246,11 @@ def answering_question(question_in,verb_in,subj_in,obj_in):
                 
         print(copy_sent_lambda_parsing_object)
 
+
    #answer for the object question
         if  'Obj' in question_object:
+         subj_for_obj=subj_in[object_position]
+         print(subj_for_obj)
          for k in range(object_position-1,0,-1):
             if copy_sent_lambda_parsing_object[k]=='1':
                 print('Answer is:',sent_lambda_parsing_object[k])
@@ -255,13 +260,13 @@ def answering_question(question_in,verb_in,subj_in,obj_in):
 
      
         elif 'Sbj' in question_object:
-         print('Yes',object_position)
+         print('Yes',subject_position)
         #positioning
         
          sent_in=[]
          print(copy_sent_lambda_parsing_object)    
         #answer for the subject question
-         for l in range(object_position,0,-1):
+         for l in range(subject_position,0,-1):
             if copy_sent_lambda_parsing_object[l]=='1':
                 print('Answer is:',sent_lambda_parsing_object[l])
                 break

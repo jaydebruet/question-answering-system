@@ -1,7 +1,1 @@
 The sentence of the texts are:
-moved John garden.
-got He apple.
-moved John kitchen.
-got Sandra milk.
-dropped John apple.
-moved John office.
